@@ -1,0 +1,27 @@
+# Example Worker configuration for the doors pattern.
+# Copy to wrangler.toml and set your own worker name.
+#
+# Doors light by CONFIGURATION. Plain values go under [vars]; secrets
+# are placed with `wrangler secret put <NAME>` (or your host's secret
+# store UI) — never in this file, never in the repo.
+
+name = "your-app-auth"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+# GitHub door — register the OAuth app with callback
+#   https://<your-origin>/v1/auth/github/callback
+GITHUB_OAUTH_CLIENT_ID = "your-github-client-id"
+# GOOGLE_OAUTH_CLIENT_ID = "your-google-client-id"
+
+# Secrets (names only — values go to the secret store):
+#   GITHUB_OAUTH_CLIENT_SECRET
+#   GOOGLE_OAUTH_CLIENT_SECRET
+#   MAILER_API_KEY
+
+# Email door — an HTTP mail API that accepts {from, to, subject, text}
+# with a bearer key (Resend-shaped; adapt src/index.js mailerFrom for
+# other providers).
+# MAILER_API_URL = "https://api.example-mailer.dev/emails"
+# MAILER_FROM = "signin@your-domain.example"

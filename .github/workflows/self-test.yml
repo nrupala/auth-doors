@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+name: self-test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  self-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288bca9618642d1e84afbd3f7d682002 # v4.4.0
+        with:
+          node-version: "20"
+      - run: node test/self-test.mjs
